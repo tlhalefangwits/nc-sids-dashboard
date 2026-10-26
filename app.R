@@ -1,5 +1,3 @@
-
-
 # =====================================================================
 # North Carolina SIDS - Spatial Statistics Dashboard
 # Methods: (1) Global Moran's I (+ Geary's C)  (2) Local Moran's I (LISA)
@@ -72,7 +70,7 @@ interpret <- function(stat, expected, p, alpha, what = "Moran's I") {
 
 # ------------------------------ UI ---------------------------------
 ui <- page_sidebar(
-  title = "North Carolina SIDS Dashboard",
+  title = "North Carolina SIDS | Spatial Statistics Dashboard",
   theme = bs_theme(version = 5, bootswatch = "flatly", primary = "#2C5F7C"),
   fillable = FALSE,
   sidebar = sidebar(
@@ -96,6 +94,53 @@ ui <- page_sidebar(
   ),
   navset_card_tab(
     id = "method",
+    # ---------- Project Overview ----------
+    nav_panel("Project Overview",
+              card(
+                card_header("Introduction"),
+                p("Sudden Infant Death Syndrome (SIDS) refers to the sudden, unexplained death of an infant that remains unexplained after a thorough investigation. This project examines county-level SIDS rates across North Carolina, USA, during 1974–1978 and 1979–1984. Spatial statistical methods are used to explore whether SIDS rates are geographically clustered, where local clusters and spatial outliers occur, and whether selected demographic indicators are associated with variation in SIDS rates."),
+                p("The analysis uses the North Carolina county dataset distributed with the sf package. The results describe statistical and geographical associations and should not be interpreted as evidence that the explanatory variables cause SIDS.")
+              ),
+              layout_columns(
+                col_widths = c(6, 6),
+                card(
+                  card_header("Project Aim"),
+                  p("To investigate the spatial distribution and spatial dependence of SIDS rates across North Carolina counties using global and local spatial autocorrelation methods and spatial regression models.")
+                ),
+                card(
+                  card_header("Research Objectives"),
+                  tags$ol(
+                    tags$li("Assess global spatial autocorrelation in SIDS rates using Global Moran's I and Geary's C."),
+                    tags$li("Identify local spatial clusters and spatial outliers using Local Moran's I (LISA)."),
+                    tags$li("Examine associations between SIDS rates and selected explanatory variables using Ordinary Least Squares (OLS) regression."),
+                    tags$li("Compare OLS results with spatial lag (SAR) and spatial error (SEM) models to account for spatial dependence."),
+                    tags$li("Interpret model results and geographical patterns while recognising the limitations of county-level data.")
+                  )
+                )
+              ),
+              card(
+                card_header("Group Members"),
+                layout_columns(
+                  col_widths = c(6, 6),
+                  card(
+                    h5("Mngadi Silungile"),
+                    p("Student number: 608589")
+                  ),
+                  card(
+                    h5("Masilela Nkosinathi"),
+                    p("Student number: 1156539")
+                  ),
+                  card(
+                    h5("Mhlanga Nomvelo"),
+                    p("Student number: 1871327")
+                  ),
+                  card(
+                    h5("Mapogo Tlhale Fang"),
+                    p("Student number: 1922259")
+                  )
+                )
+              )
+    ),
     # ---------- Method 1 ----------
     nav_panel("Global Moran's I",
               layout_columns(col_widths = c(12), uiOutput("moran_boxes")),
@@ -290,4 +335,3 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui, server)
-
