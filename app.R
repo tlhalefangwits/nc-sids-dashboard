@@ -72,7 +72,7 @@ interpret <- function(stat, expected, p, alpha, what = "Moran's I") {
 
 # ------------------------------ UI ---------------------------------
 ui <- page_sidebar(
-  title = "North Carolina SIDS | Spatial Statistics Dashboard",
+  title = "North Carolina SIDS Dashboard",
   theme = bs_theme(version = 5, bootswatch = "flatly", primary = "#2C5F7C"),
   fillable = FALSE,
   sidebar = sidebar(
